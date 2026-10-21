@@ -1,4 +1,4 @@
-import { test as base, chromium, Page } from '@playwright/test';
+import { test as base, chromium, Page, devices } from '@playwright/test';
 import { MainPage } from '../pages/mainPage';
 import { ProductListPage } from '../pages/productListPage';
 import { ProductInfoPage } from '../pages/productInfoPage';
@@ -12,15 +12,24 @@ type MyFixtures = {
 
 export const test = base.extend<MyFixtures>({
   page: async ({}, use) => {
-    // จัดการเชื่อมต่อ Real Device ผ่าน CDP ตรงนี้ที่เดียว
-    const browser = await chromium.connectOverCDP('http://localhost:9222');
-    const defaultContext = browser.contexts()[0];
-    const page = defaultContext.pages()[0] || await defaultContext.newPage();
-    
-    await use(page);
-
-    // ปิดการเชื่อมต่อหลังเทสเสร็จ
-    await browser.close();
+    let page: Page;
+    let browser;
+    // ตรวจสอบว่ารันบน CI (GitHub Actions) หรือไม่
+    if (process.env.CI) {
+      // ถ้ารันบน GitHub Actions ให้ใช้โหมดปกติหรือจำลองมือถือ
+      const browserInstance = await chromium.launch({ headless: true });
+      const context = await browserInstance.newContext({ ...devices['Pixel 5'] });
+      page = await context.newPage();
+      await use(page);
+      await browserInstance.close();
+    } else {
+      // ถ้ารันบนเครื่องตัวเอง ต่อมือถือจริงผ่าน CDP (พอร์ต 9222)
+      browser = await chromium.connectOverCDP('http://localhost:9222');
+      const defaultContext = browser.contexts()[0];
+      page = defaultContext.pages()[0] || await defaultContext.newPage();
+      await use(page);
+      await browser.close();
+    };
   },
 
   mainPage: async ({ page }, use) => {
