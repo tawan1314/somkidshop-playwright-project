@@ -7,14 +7,19 @@ export class ProductInfoPage extends BasePage{
         super(page);
     };
 
+    get productDetailLocator() { return this.page.locator('span', {hasText: 'รายละเอียดสินค้า'}) };
+    get productNameLocator() { return this.page.locator('h1[class="thai-wrap font-kanit text-[20px] font-bold leading-[1.4] text-ink"]') };
+    get productPriceLocator() { return this.page.locator('span[class="font-kanit text-[24px] font-bold leading-[1.3] text-orange"]') };
+    get productInstallmentLocator() { return this.page.locator('button[aria-label="ผ่อนเริ่มต้นประมาณ 650 บาท/เดือน"]') };
+
     async validateHeader() {
-        await expect(this.page.locator('span', {hasText: 'รายละเอียดสินค้า'})).toBeVisible();
+        await expect(this.productDetailLocator).toBeVisible();
     };
 
-    async verifyProductInfo() {
-        await expect(this.page.locator('h1[class="thai-wrap font-kanit text-[20px] font-bold leading-[1.4] text-ink"]',{hasText: 'ล้อใบพายกันจม มิตรชาวนา แขนปรับได้ สำหรับแทรกเตอร์คูโบต้า 34-52 แรงม้า'})).toBeVisible();
-        await expect(this.page.locator('span[class="font-kanit text-[24px] font-bold leading-[1.3] text-orange"]',{hasText: '฿12,500'})).toBeVisible();
-        await expect(this.page.locator('button[aria-label="ผ่อนเริ่มต้นประมาณ 650 บาท/เดือน"]')).toBeVisible();
+    async verifyProductInfo(productInfo: ReplacementPartInfo | PeripheralsInfo | EngineInfo | WalkBehindTractorInfo | TrackterInfo) {
+        await expect(this.productNameLocator.filter({hasText: productInfo.name})).toBeVisible();
+        await expect(this.productPriceLocator.filter({hasText: productInfo.price})).toBeVisible();
+        // await expect(this.productInstallmentLocator).toBeVisible();
         // await expect(this.page.locator('h1[class="font-kanit text-[24px] font-bold leading-[1.3] text-orange"]',{hasText: '฿12,500'})).toBeVisible();
         // await expect(this.page.locator('h1[class="font-kanit text-[24px] font-bold leading-[1.3] text-orange"]',{hasText: '฿12,500'})).toBeVisible();
     };

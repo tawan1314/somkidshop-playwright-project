@@ -7,17 +7,6 @@ export class BasePage {
         this.page = page;
    };
 
-   async openSomkidshopWebsite() {
-    await this.page.goto('https://somkidshop.com/');
-    await this.acceptCookies();
-   };
-
-   async acceptCookies() {
-    if (await this.page.locator('div[aria-label="การใช้คุกกี้"]').isVisible()) {
-        await this.page.getByRole('button', { name: 'ยอมรับ', exact: true }).click();
-    };
-   };
-
    async capturePage(caseNo: string, page: string, filename: string) {
     await this.page.screenshot({
         path: `resultPictures/${caseNo}/${page}/${filename}`,

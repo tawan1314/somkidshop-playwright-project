@@ -67,4 +67,9 @@ export class BasketPage extends BasePage{
         await this.validateClearBasketButton();
         await this.page.locator('button', {hasText: 'ล้างตะกร้า'}).click({delay: 500});
     };
+
+    async verifyBasketIsEmpty() {
+        await expect(this.page.locator('p', {hasText: 'ตะกร้ายังว่าง เลือกเครื่อง โครง และอุปกรณ์ใส่รวมกันได้ แล้วส่งให้ร้านทีเดียว'})).toBeVisible();
+        await expect(this.page.locator('a', {hasText: 'ไปเลือกรถไถเดินตาม'})).toBeVisible();
+    };
 };
