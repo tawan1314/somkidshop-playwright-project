@@ -3,7 +3,7 @@
 โปรเจคระบบทดสอบอัตโนมัติ (Test Automation) สำหรับเว็บไซต์ **Somkid Shop** พัฒนาด้วย **Playwright** และ **TypeScript** รองรับการทำงานแบบ Dual-Environment ทั้งบนอุปกรณ์มือถือจริง (ผ่าน Chrome DevTools Protocol - CDP) และบนระบบ CI/CD (GitHub Actions)
 
 ## 📂 โครงสร้างโปรเจค (Project Structure)
-```text
+```
 ├── fixtures/          # จัดการ Test Fixtures (เช่น baseTest.ts สำหรับสลับ Environment และเคลียร์ค่า)
 ├── pages/             # Page Object Model classes (BasePage, MainPage, ProductInfoPage, BasketPage, ฯลฯ)
 ├── test-data/         # ข้อมูลจำลองสำหรับใช้ในการทดสอบ (เช่น testData.data.ts)
@@ -11,17 +11,20 @@
 ├── tests/             # โฟลเดอร์เก็บ Test Scripts (.spec.ts)
 ├── playwright.config.ts # ไฟล์ตั้งค่าหลักของ Playwright
 └── README.md          # คู่มือการใช้งานโปรเจค
+```
 
 ## 🛠 เครื่องมือและเทคโนโลยีที่ใช้ (Tech Stack)
-Language: TypeScript
-Test Framework: Playwright
-Design Pattern: Page Object Model (POM)
-Environment: Node.js, GitHub Actions (CI)
+- Language: TypeScript
+- Test Framework: Playwright
+- Design Pattern: Page Object Model (POM)
+- Environment: Node.js, GitHub Actions (CI)
 
 ## ⚙️ วิธีการติดตั้งและตั้งค่า (Setup Guide)
-1. Clone Repository ลงในเครื่อ
-- `git clone <url-repository-ของคุณ>`
-- `cd <ชื่อโฟลเดอร์โปรเจค>`
+1. Clone Repository ลงในเครื่อง. สร้างโฟลเดอร์เก็บงาน
+- `mkdir somkidshop-playwright-automation`
+- `cd somkidshop-playwright-automation`
+2. สร้างโฟลเดอร์เก็บงาน
+- `git clone https://github.com/tawan1314/somkidshop-playwright-automation.git`
 2. ติดตั้ง Package และ dependencies ที่จำเป็น
 - `npm install`
 3. ติดตั้ง Playwright Browsers
