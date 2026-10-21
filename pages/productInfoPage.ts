@@ -25,20 +25,22 @@ export class ProductInfoPage extends BasePage{
     };
 
     async validateAddToCartButton() {
-        try {
-            await expect(this.page.locator('button[aria-label="ใส่ตะกร้า"]')).toBeVisible();
-        } catch {
-            await expect(this.page.locator('a[aria-label="ดูตะกร้า"]')).toBeVisible();
-        }
+        await expect(this.page.locator('button[aria-label="ใส่ตะกร้า"]')).toBeVisible();
     };
 
     async clickAddToCartButton() {
         await this.validateAddToCartButton();
-        try {
-            await this.page.locator('button[aria-label="ใส่ตะกร้า"]').click({delay: 500});
-        } catch {
-            await this.page.locator('a[aria-label="ดูตะกร้า"]').click({delay: 500});
-        };
+        await this.page.locator('button[aria-label="ใส่ตะกร้า"]').click({delay: 500});
+        await this.validateViewCartButton();
+    };
+
+    async validateViewCartButton() {
+        await expect(this.page.locator('a[aria-label="ดูตะกร้า"]')).toBeVisible();
+    };
+
+    async clickViewCartButton() {
+        await this.validateViewCartButton();
+        await this.page.locator('a[aria-label="ดูตะกร้า"]').click({delay: 500});
     };
 
     async validateNumberOfItemsInCart(expectedCount: number) {
