@@ -61,4 +61,41 @@ export class ProductInfoPage extends BasePage{
         await this.validateCartButton();
         await this.page.locator('a[aria-label="ตะกร้าจัดชุด"]').click({delay: 500});
     };
+
+    async clickProductPicture() {
+        const productPictureLocator = 'div[data-product-gallery]';
+        await expect(this.page.locator(productPictureLocator)).toBeVisible();
+        await this.page.locator(productPictureLocator).click({delay: 500});
+    };
+
+    async swipeProductPicture(direction: 'left' | 'right', distance: number) {
+        const productPictureCountLocator = 'span[data-gallery-counter]'; // แสดงเป็น 1/11 ต้องการเลขสุดท้ายคือ 11
+        await expect(this.page.locator(productPictureCountLocator)).toBeVisible();
+        const productPictureCountText = await this.page.locator(productPictureCountLocator).textContent();
+        const productPictureCount = parseInt(productPictureCountText?.split('/')[1] || '0', 10);
+        await expect(this.page.locator(productPictureCountLocator)).toBeVisible();
+        await this.clickProductPicture();
+        for (let i = 0; i < productPictureCount - 1; i++) {
+            await this.swipe(direction, distance, 'div');
+            await this.page.waitForTimeout(500);
+        };
+    };
+
+    async clickNextProductPictureButton() {
+        const nextButtonLocator = 'button[aria-label="รูปถัดไป"]';
+        await expect(this.page.locator(nextButtonLocator)).toBeVisible();
+        await this.page.locator(nextButtonLocator).click({delay: 500});
+    };
+
+    async clickPreviousProductPictureButton() {
+        const previousButtonLocator = 'button[aria-label="รูปก่อนหน้า"]';
+        await expect(this.page.locator(previousButtonLocator)).toBeVisible();
+        await this.page.locator(previousButtonLocator).click({delay: 500});
+    };
+
+    async clickCloseProductPictureButton() {
+        const closeButtonLocator = 'button[aria-label="ปิด"]';
+        await expect(this.page.locator(closeButtonLocator)).toBeVisible();
+        await this.page.locator(closeButtonLocator).click({delay: 500});
+    };
 };
