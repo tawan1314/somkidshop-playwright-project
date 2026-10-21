@@ -28,7 +28,7 @@ export class ProductInfoPage extends BasePage{
         try {
             await expect(this.page.locator('button[aria-label="ใส่ตะกร้า"]')).toBeVisible();
         } catch {
-            await expect(this.page.locator('button[aria-label="ดูตะกร้า"]')).toBeVisible();
+            await expect(this.page.locator('a[aria-label="ดูตะกร้า"]')).toBeVisible();
         }
     };
 
@@ -37,7 +37,7 @@ export class ProductInfoPage extends BasePage{
         try {
             await this.page.locator('button[aria-label="ใส่ตะกร้า"]').click({delay: 500});
         } catch {
-            await this.page.locator('button[aria-label="ดูตะกร้า"]').click({delay: 500});
+            await this.page.locator('a[aria-label="ดูตะกร้า"]').click({delay: 500});
         };
     };
 
