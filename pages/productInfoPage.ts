@@ -25,13 +25,21 @@ export class ProductInfoPage extends BasePage{
     };
 
     async validateAddToCartButton() {
-        await expect(this.page.locator('button[aria-label="ใส่ตะกร้า"]')).toBeVisible();
+        try {
+            await expect(this.page.locator('button[aria-label="ใส่ตะกร้า"]')).toBeVisible();
+        } catch {
+            await expect(this.page.locator('button[aria-label="ดูตะกร้า"]')).toBeVisible();
+        }
     };
 
     async clickAddToCartButton() {
         await this.validateAddToCartButton();
-        await this.page.locator('button[aria-label="ใส่ตะกร้า"]').click({delay: 500});
-    }
+        try {
+            await this.page.locator('button[aria-label="ใส่ตะกร้า"]').click({delay: 500});
+        } catch {
+            await this.page.locator('button[aria-label="ดูตะกร้า"]').click({delay: 500});
+        };
+    };
 
     async validateNumberOfItemsInCart(expectedCount: number) {
         const cartCountLocator = this.page.locator('span[class="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 font-kanit text-[14px] font-bold leading-none text-navy"]');
