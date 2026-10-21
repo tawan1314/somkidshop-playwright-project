@@ -17,7 +17,6 @@ export class ProductListPage extends BasePage{
 
     async validateHeaderSearching(searchingName: string) {
         const headerSearching = new RegExp(`ผลการค้นหา\\s+"${searchingName}"`)
-        console.log(headerSearching)
         await expect(this.page.locator('h1', {hasText: headerSearching})).toBeVisible();
     };
 

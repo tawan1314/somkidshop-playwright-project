@@ -12,28 +12,21 @@ type MyFixtures = {
 
 export const test = base.extend<MyFixtures>({
   page: async ({}, use) => {
-    // ตรวจสอบว่ารันบน CI (GitHub Actions) หรือไม่
     if (process.env.CI) {
-      // ถ้ารันบน GitHub Actions ให้ใช้โหมดจำลองมือถือ (Pixel 5)
+      // ถ้ารันบน GitHub Actions (ไม่มีมือถือจริง ให้ใช้ Mobile Emulation)
       const browserInstance = await chromium.launch({ headless: true });
       const context = await browserInstance.newContext({ ...devices['Pixel 5'] });
       const page = await context.newPage();
-      
       await use(page);
-      
       await browserInstance.close();
     } else {
-      // ถ้ารันบนเครื่องตัวเอง ต่อมือถือจริงผ่าน CDP (พอร์ต 9222)
+      // ถ้ารันบนคอมตัวเอง (ต่อมือถือจริงผ่านพอร์ต 9222)
       const browser = await chromium.connectOverCDP('http://localhost:9222');
       const defaultContext = browser.contexts()[0];
-      
-      // ป้องกันกรณี defaultContext เป็น undefined อย่างปลอดภัย
       const page = defaultContext 
         ? (defaultContext.pages()[0] || await defaultContext.newPage()) 
         : await browser.newPage();
-      
       await use(page);
-      
       await browser.close();
     }
   },
