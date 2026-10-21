@@ -19,12 +19,13 @@ export interface ReplacementPartInfo extends BaseProductInfo {
     oeType: string, //OE, OEM, OES
     code: string,
     type: string,
-    useWithModel: string
+    useWithModel: string,
+    useWithCarType: string
 };
 
 export interface PeripheralsInfo extends BaseProductInfo {
-    type: string,
-    useWithTrackter: string
+    brand: string,
+    type: string
 };
 
 export interface EngineInfo extends BaseProductInfo {

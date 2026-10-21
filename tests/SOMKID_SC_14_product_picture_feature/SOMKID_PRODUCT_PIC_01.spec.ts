@@ -9,5 +9,10 @@ test.describe('SCENARIO-รูปภาพของสินค้า', () => {
     await productListPage.validateSearchResultCount();
     await productListPage.selectProduct();
     await productInfoPage.validateHeader();
+    await productInfoPage.verifyEngineInfo(testData.productInfo.engine);
+    await productInfoPage.verifyProductPictures();
+    await productInfoPage.clickCloseProductPictureButton();
+    await productInfoPage.validateProductPicturesIsNotVisible();
+    await productInfoPage.validateHeader();
   });
 });

@@ -43,8 +43,10 @@ export class ProductListPage extends BasePage{
     };
 
     async validateProductInfo(productInfo: ProductListInfo) {
-        await expect(this.page.locator('h3', {hasText: productInfo.name})).toBeVisible();
-        await expect(this.page.locator('span', {hasText: productInfo.price})).toBeVisible();
+        await expect(this.page.locator('h3', {hasText: new RegExp(`^${productInfo.name}$`)})).toBeVisible();
+        await expect(this.page.locator('h3', {hasText: new RegExp(`^${productInfo.name}$`)})
+                              .locator('xpath=following-sibling::div[1]')
+                              .locator('span[data-card-line="true"]', {hasText: `฿${productInfo.price}`})).toBeVisible();
     };
 
     async selectProduct(productInfo?: ProductListInfo) {

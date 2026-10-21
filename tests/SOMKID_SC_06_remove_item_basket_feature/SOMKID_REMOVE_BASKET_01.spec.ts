@@ -15,13 +15,13 @@ test.describe('SCENARIO-ลบสินค้าออกจากตะกร�
     await basketPage.validateHeader();
     await basketPage.verifyProductInfo({
       product: {
-        name: testData.productInfo.name,
-        price: testData.productInfo.price
+        name: testData.productInfo.engine.name,
+        price: testData.productInfo.engine.price
       },
-      quantity: testData.productInfo.quantity
+      quantity: testData.productInfo.engine.quantity
     });
     await basketPage.verifyPaymentMethods();
-    await basketPage.verifyAmount(testData.productInfo.price);
+    await basketPage.verifyAmount(testData.productInfo.engine.price);
     await basketPage.verifyDeliveryAddress();
     await basketPage.verifyContactInfo();
     await basketPage.validateAddressHintLabel();
