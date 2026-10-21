@@ -12,7 +12,7 @@ export class ProductListPage extends BasePage{
     };
 
     async validateHeaderCategory(headerName: string) {
-        await expect(this.page.locator('h1', {hasText: headerName})).toBeVisible();
+        await expect(this.page.locator('h1', {hasText: headerName}).first()).toBeVisible();
     };
 
     async validateHeaderSearching(searchingName: string) {

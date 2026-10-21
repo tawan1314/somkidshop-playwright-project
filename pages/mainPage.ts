@@ -7,8 +7,8 @@ export class MainPage extends BasePage{
     };
 
     async validateHeader() {
-        await expect(this.page.locator('span', {hasText: 'somkidshop'})).toBeVisible();
-        await expect(this.page.locator('span', {hasText: 'สมคิดช็อป'})).toBeVisible();
+        await expect(this.page.locator('span', {hasText: 'somkidshop'}).first()).toBeVisible();
+        await expect(this.page.locator('span', {hasText: 'สมคิดช็อป'}).first()).toBeVisible();
     };
 
     async validateSearchField() {
