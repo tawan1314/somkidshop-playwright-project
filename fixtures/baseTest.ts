@@ -2,11 +2,13 @@ import { test as base, chromium, Page, devices } from '@playwright/test';
 import { MainPage } from '../pages/mainPage';
 import { ProductListPage } from '../pages/productListPage';
 import { ProductInfoPage } from '../pages/productInfoPage';
+import { BasketPage } from '../pages/basketPage';
 
 type MyFixtures = {
   mainPage: MainPage;
   productListPage: ProductListPage;
   productInfoPage: ProductInfoPage;
+  basketPage: BasketPage;
   page: Page;
 };
 
@@ -41,6 +43,10 @@ export const test = base.extend<MyFixtures>({
 
   productInfoPage: async ({ page }, use) => {
     await use(new ProductInfoPage(page));
+  },
+
+  basketPage: async ({ page }, use) => {
+    await use(new BasketPage(page));
   },
 });
 

@@ -12,4 +12,9 @@ export const testData = {
         parts: 'อะไหล่',
         secondHandProduct: 'มือสอง',
     },
+    productInfo: {
+        name: 'เครื่องยนต์คูโบต้า RT110 DI Plus มือสอง 11 แรงม้า',
+        price: '24,500',
+        quantity: 1
+    },
 };

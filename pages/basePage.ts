@@ -21,4 +21,10 @@ export class BasePage {
         fullPage: true
     });
    };
+
+   async calculateAmount(amount: string, quantity: number): Promise<string> {
+    const amountNumber = parseFloat(amount.replace(/,/g, ''));
+    const totalAmount = amountNumber * quantity;
+    return totalAmount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+   };
 };

@@ -3,6 +3,11 @@ export interface ProductListInfo {
     price: string
 };
 
+export interface BasketInfo {
+    product: ProductListInfo,
+    quantity: number
+};
+
 export interface BaseProductInfo {
     name: string,
     desc: string,
